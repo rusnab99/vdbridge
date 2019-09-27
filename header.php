@@ -9,8 +9,14 @@ setcookie("debug_code",generateCode(),0,COOKIEPATH, COOKIE_DOMAIN );?>
     <?php wp_head(); ?>
 </head>
 <body>
-<div id="logo">
-    <a href="<?php echo home_url(); ?>"><img src="<?php bloginfo('template_url'); ?>/images/shapka.png" alt="" title="" /></a
+<header>
+<div class="header">
+    <div class="logo">
+    <img src="<?php bloginfo('template_url'); ?>/img/80.png"/>
+    </div>
+    <div class="mainText">VD Bridge
+        <div class="mainText1">Строить мосты между людьми</div>
+    </div>
 </div>
 
 <?php
@@ -35,5 +41,9 @@ $args = array(
 );
 
 wp_nav_menu( $args );
-
 ?>
+<div class="regis">
+    <button type="submit">Регистрация/вход</button>
+</div>
+</header>
+

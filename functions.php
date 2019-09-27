@@ -44,34 +44,76 @@ add_filter( 'excerpt_more', 'new_excerpt_more' );
 add_shortcode('set_order','get_oreder_form');
 
 function get_oreder_form(){
-    if ( is_user_logged_in()&&!isset($_COOKIE['Demo']) ) {
+    if ( is_user_logged_in()&&!isset($_COOKIE['Demo'])||is_logged_in() ) {
         $res="
 <script>
       function checkForm(form)
 {    
-var txt = form.getElementById('projectName').value; //создаем переменную по данным Имя пользователя
-var file=form.getElementById('file').value; //создаем переменную по номеру телефона пользователя
-    if(txt == ''||txt) //проверяем не пустое ли поле Имя
-    {        
-alert('Вы забыли ввести имя проекта.'); //и выводим сообщение если пустое поле Имя
+var txt = document.getElementById('projectName').value; //создаем переменную по данным Имя пользователя
+//var file=document.getElementById('scheme').value; //создаем переменную по номеру телефона пользователя
+    if(txt == ''||txt==null) //проверяем не пустое ли поле Имя
+    {        alert(txt);
+alert('Вы забыли ввести имя проекта.');
+//и выводим сообщение если пустое поле Имя
         return false;
     }     
-if(file== ''||file==null)    { //проверяем пустое ли поле телефон
-        alert('Необходимо прекрепить файл проекта.'); // и если таки да, оно пустое, то выводим сообщение об этом
-        return false;
-    }
+//if(file== ''||file==null)    { //проверяем пустое ли поле телефон
+  //      alert('Необходимо прекрепить файл проекта.'); // и если таки да, оно пустое, то выводим сообщение об этом
+  //      return false;
+ //   }
+ {var request = new XMLHttpRequest();
+
+request.open(\"POST\", \"".get_theme_file_uri("set-order.php")."\", true);
+request.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded; charset=UTF-8\");
+
+request.onload = function() {
+  if (this.status >= 200 && this.status < 400) {
+   
+    var resp = this.response;
+    alert(resp);
+//	if(resp==1)
+	//document.getElementById(\"email_ch\").innerHTML =\"Данный E-mail адрес не найден\";
+//	else if(resp==2)
+//		document.getElementById(\"pass_ch\").innerHTML =\"Введен неверный пароль\";
+//	else if(resp==0)location.replace(\"".get_site_url()."\");
+  } else {
+    // We reached our target server, but it returned an error
+alert(\"Все сломалось! Попробуйте перезагрузить страницу\");
+  }
+};
+let data={
+	 last_date:lastDate.value,
+    max_price:cost.value,
+    name:projectName.value,
+    descr:description.value,
+    sch:scheme.value,
+    def:defect.value,
+    acc:accuracy.value,
+    tpe:PCB_type.value,
+    mthd:prod_type.value,
+    stck:stock.value,   
+    qtty:quantity.value
+};
+
+let json = \"login=\"+JSON.stringify(data);
+
+request.send(json);
+
+  
+   return false;
+		}
       return true;}      </script>
 
-<form id=\"order\" onsubmit=\"return checkForm(this)\" action=\"functions.php\" target=\"_self\" method=\"POST\">
+<form id=\"order\" onsubmit=\"return checkForm(this)\" action=\"set-order.php\"  method=\"POST\">
 <p>Название проекта: <input name=\"projectName\" id=\"projectName\" type=\"text\" requied></p>
-<p>Крайний срок готовности: <input name=\"lastDate\" type=\"date\"></p>
-Максимальная стоимость:<p style=\"display: flex;\"> <input name=\"cost\" type=\"number\" width=80%>
+<p>Крайний срок готовности: <input name=\"lastDate\" id='lastDate' type=\"date\"></p>
+Максимальная стоимость:<p style=\"display: flex;\"> <input name=\"cost\" id='cost' type=\"number\" width=80%>
 <select name=\"valueType\" form=\"order\" width=20%>
 	
 	<option value=\"usd\">$,usd</option>
 	</select>
 	</p>
-<p>Ссылка на Файл проекта:<input name=\"file\" id=\"file\" type=\"text\" requied></p>
+
 <p>Описание проекта:<input name=\"description\" id=\"description\" type=\"text\" requied></p>
 <p>Количество экзепляров:<input name=\"quantity\" id =\"quantity\" type='number' required> </p>
 <p>Допустимый процент брака:<input name=\"defect\" id='defect' type='number' required></p>
@@ -95,6 +137,15 @@ if(file== ''||file==null)    { //проверяем пустое ли поле �
 <option>Многослойная </option>
 </select>
 </p>
+<p>
+<details>
+<summary>Приложения</summary>
+<p>Схема<input type='file' id='scheme' name='scheme' required></p>
+<p>Документация<input type='file' id='documentation' name='documentation'></p>
+<p>Требования<input type='file' id='requirements' name='requirements'></p>
+<p>BOM-лист<input type='file' id='BOM' name='BOM'></p>
+
+</details></p>
 <p> Метод изготовления печатной платы
 <select name='prod_type' id='prod_type'>
 <option>Любой</option>
@@ -103,7 +154,7 @@ if(file== ''||file==null)    { //проверяем пустое ли поле �
 <option>аддитивный</option>
 <option>комбинированный</option>
 </select></p>
-
+<p>Наличие давальческого сырья: <input type='checkbox' id='stock' name='stock'> </p>
 <p><input type=\"submit\" form=\"order\" value=\"Отправить\" name=\"submit_order\"></p>
 
 </form>
@@ -116,8 +167,8 @@ if(file== ''||file==null)    { //проверяем пустое ли поле �
 <script>
       function checkForm(form)
 {    
-var txt = form.getElementById('projectName').value; //создаем переменную по данным Имя пользователя
-var file=form.getElementById('file').value; //создаем переменную по номеру телефона пользователя
+var txt = document.getElementById('projectName').value; //создаем переменную по данным Имя пользователя
+var file=document.getElementById('scheme').value; //создаем переменную по номеру телефона пользователя
     if(txt == ''||txt) //проверяем не пустое ли поле Имя
     {        
 alert('Вы забыли ввести имя проекта.'); //и выводим сообщение если пустое поле Имя
@@ -153,7 +204,7 @@ if(file== ''||file==null)    { //проверяем пустое ли поле �
 }
 
 
-
+/*
 if(isset($_POST['submit_order']))
 {	echo ($wpdb->get_var("SHOW TABLES LIKE 'vdb_orders'") == $table_name);
     global $wpdb;
@@ -192,7 +243,7 @@ if(isset($_POST['submit_order']))
     require_once( ABSPATH.'wp-admin/includes/upgrade.php');
     dbDelta($sql,true);
 
-}
+}*/
 
 add_shortcode('order_list','get_order_list');
 
@@ -316,12 +367,7 @@ function get_reg_form()
    <p>Название компании<input type=\"text\" name=\"company\" > <span id=\"company_ch\"/></p>
    <p>E-mail<input type=\"e-mail\" name=\"email\" > <span id=\"email_ch\"</p>
    <p>Пароль<input type=\"password\" oninput=\"check_password()\"id=\"password\" name=\"password\" > <span id=\"difficulty\"/></p>
-   <p>Кто вы?<select name=\"role\">
-   <option>Заказчик</option>
-   <option >Поставщик</option>
-   <option >Производство</option>
-   </select>
-   </p>
+   
    <p><input type=\"submit\" onsubmit=\"return check_reg(company,email);\" value=\"Зарегистрироваться\"></p>
   </form>
   <script>
@@ -396,9 +442,9 @@ if(isset($_POST['submit_order']))
     $email=esc_sql($_POST['email']);
     $company=esc_sql($_POST['company']);
     $password=esc_sql(md5($_POST['password']));
-    $role=esc_sql($_POST['role']);
-    $sql = "INSERT INTO vdb_clients (`email`,`pass`,`role`,`company`,'code') VALUES
-	('".$email."','".$password."','".$role."','".$company.",NULL)";
+
+    $sql = "INSERT INTO vdb_clients (`email`,`pass`,`company`,'code') VALUES
+	('".$email."','".$password."','".$company.",NULL)";
     require_once( ABSPATH.'wp-admin/includes/upgrade.php');
     dbDelta($sql,true);
 }
@@ -537,5 +583,73 @@ function get_client_orders()
 
 				  ";
     }
+}
+
+add_shortcode("company_info","get_company_info");
+function get_company_info()
+{
+if(isset($_GET["id"]))
+    return get_other_company_info($_GET["id "]);
+else return get_own_comany_info();
+}
+function get_other_company_info($id)
+{
+    global $wpdb;
+    $sql = "SELECT `role` FROM `vdb_clients` WHERE `id`=".$_COOKIE["user_id"];
+    $role=$wpdb->get_var($sql);
+    $res="<div id='info'>";
+    if($role=="individual")
+    {
+        $sql = "SELECT * FROM `vdb_individual` where 'id'=".$_COOKIE["user_id"];
+        $info=$wpdb->get_row($sql,ARRAY_A);
+        $res=$info;
+    }elseif($role==NULL)
+    {
+        $res="<div id='info'>
+<select onchange='get_info_form(this.value)' id='comp_type'>
+<option value='1'>ИП</option>
+<option value='2'>ООО</option>
+<option value='3'>ОДО</option>
+<option value='4'>ОАО</option>
+<option value='5'>АО</option>
+<option value='6'>ЗАО</option>
+<option value='7'>Государственное или муниципальное унитарное предприятие</option>
+</select>
+<div id='data'>
+</div>
+<script>
+function get_info_form(type){
+    
+    var request = new XMLHttpRequest();
+
+request.open(\"POST\", \"".get_theme_file_uri("first-info.php")."\", true);
+request.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded; charset=UTF-8\");
+
+request.onload = function() {
+  if (this.status >= 200 && this.status < 400) {
+   alert(this.response);
+	document.getElementById('data').innerHTML =this.response;
+}else alert('fuck');}
+alert(type);
+request.send(type);
+
+  
+   
+		}
+}
+</script>";
+    }elseif
+    ($role!=employee)
+    {
+        $sql = "SELECT * FROM `vdb_companies` WHERE`id`=".$_COOKIE["user_id"];
+        $info=$wpdb->get_row($sql,ARRAY_A);
+        $res=$info;
+    }
+    return $res;
+}
+
+function get_own_comany_info()
+{
+
 }
 ?>

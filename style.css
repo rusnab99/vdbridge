@@ -5,3 +5,797 @@ Version: 0.1
 Author: Rusnab
 
 */
+
+*{
+    font-family: Roboto;
+    /* 		outline: 0.5vh solid red; */
+    box-sizing: border-box;
+}
+
+/* COLOR SCHEME
+
+- #ffffff текст основной;
+- #34A9A1 основной блочный;
+- #368B84 наведенный элемент/активный;
+- #E5E5E5 доп. фоновый цветж
+
+*/
+
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 16vh;
+    background: #34A9A1;
+}
+
+.header {
+    display: flex;
+    height: 15.5vh;
+    width: 30vw;
+
+}
+.logo img {
+    width: 6.8vw;
+    margin-top: 1vh;
+    margin-left: 2vw;
+}
+
+.mainText {
+    width: 9vw;
+    margin: 4vh 1vw;
+    font-size: 3.5vh;
+    letter-spacing: 0.1vw;
+    line-height: 4vh;
+    font-weight: bold;
+    color: #fff;
+}
+
+.mainText1 {
+    width: 10vw;
+    height: 5vh;
+    margin-top: 0.5vh;
+    font-size: 2vh;
+    line-height: 2.5vh;
+    letter-spacing: 0.1vw;
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    margin-top: 6vh;
+    margin-left: -15vw;
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav li {
+    display: inline-block;
+    min-width: 6.25vw;
+}
+
+nav a {
+    padding: 1.25vh 1vw;
+    text-decoration: none;
+    background: #34A9A1;
+    border-radius: 4vh;
+    font-size: 2.5vh;
+    line-height: 5vh;
+    font-style: normal;
+    font-weight: bold;
+    color: #fff;
+}
+
+nav a:hover {
+    background: #368B84;
+}
+
+/*заменить пиксели в box на vh/vw*/
+nav a:active {
+    background: #368B84;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.regis button {
+    margin-top: 5.5vh;
+    margin-right: 1.5vw;
+    width: 14vw;
+    height: 5.5vh;
+    background: #34A9A1;
+    border-radius: 5vh;
+    border: 0vh;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.5vh;
+    line-height: 3vh;
+    text-align: center;
+    color: #FFFFFF;
+    outline: none;
+}
+
+.regis button:hover {
+    background: #368B84;
+    cursor: pointer;
+}
+
+/*заменить px на vh/vw*/
+.regis button:active {
+    background: #368B84;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/*  HOME LIST  */
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.slider {
+    width: 100%;
+    height: 38vh;
+    background: rgba(0, 0, 0, 0.42) url(img/circuit-digital-electronics-39290.png);
+    background-size: 100vw 38vh;
+    background-blend-mode: overlay;
+}
+
+.vector1,
+.vector2 {
+    position: relative;
+    width: 42vw;
+    height: 31vh;
+    background-size: 42vw 31vh;
+    background-image: url(img/Vector.png);
+}
+
+.vector1 {
+    margin-left: 8vw;
+    margin-top: 2vh;
+}
+
+.slider span {
+    display: block;
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3.5vh;
+    line-height: 4.8vh;
+    width: 35.9vw;
+    height: 25.8vh;
+}
+
+.vector1 span {
+    text-align: right;
+    margin-left: 4.5vw;
+    margin-top: 2.5vh;
+}
+
+.vector2 {
+    transform: rotate(-180deg);
+    margin-left: 3.5vw;
+    margin-top: -32vh;
+}
+
+.vector2 span{
+    transform: rotate(180deg);
+    margin-left: 5.5vw;
+    margin-top: 3.5vh;
+    text-align: left;
+}
+.slider button {
+    display: block;
+    width: 8vw;
+    height: 4.5vh;
+    background: #FFFFFF;
+    border-radius: 2.5vh;
+    border: 0vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8vh;
+    margin-left: 82.8vw;
+    margin-top: -5vh;
+    outline: none;
+    color: #34A9A1;
+}
+
+.slider button:hover {
+    background: #34A9A1;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.slider button:active {
+    background: #34A9A1;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.divBlock{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 69.5vh;
+    margin-top: 5.25vh;
+}
+
+.blocks {
+    display: inline-flex;
+    width: 19.5vw;
+    height: 69.5vh;
+    background: #34A9A1;
+    border-radius: 6.6vh;
+}
+
+.iconPl {
+    position: absolute;
+    margin-left: 5.5vw;
+    margin-top: 8.25vh;
+    width: 7.8vw;
+    height: 15vh;
+    background: #C4C4C4;
+}
+
+.nameBlock{
+    position: absolute;
+    width: 15.6vw;
+    height: 4vh;
+    margin-left: 1vw;
+    margin-top: 2vh;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 4vh;
+    line-height: 5vh;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.blocks ul{
+    position: absolute;
+    width: 16vw;
+    height: 25vh;
+    margin-top: 28vh;
+    padding-left: 2vw;
+    font-style: normal;
+    font-weight: 26vw;
+    font-size: 1.8vh;
+    line-height: 2.5vh;
+    list-style-position: inside;
+    color: #FFFFFF;
+}
+
+.more,
+.moreActive {
+    margin-left: 4vw;
+    margin-top: 66vh;
+    position: absolute;
+    display: none;
+    padding-top: 1.8vh;
+    padding-left: 1.5vw;
+    width: 9.4vw;
+    height: 5.8vh;
+    background-color: #368B84;
+    border-radius: 2vh;
+    text-decoration: none;
+    text-align: left;
+    font-size: 2vh;
+    color: #fff;
+}
+
+.blocks a img {
+    display: block;
+    margin-left: 5.77vw;
+    margin-top: -2.5vh;
+    width: 1.3vw;
+}
+
+.blocks:hover {
+
+}
+
+.blocks:hover .more{
+    display: block;
+    cursor: pointer;
+}
+
+.blocks:active .more {
+    display: none;
+}
+
+.blocks:active .moreActive{
+    text-decoration: underline;
+    display: block;
+    font-weight: bold;
+}
+
+.statBlock {
+    width: 100%;
+    height: 54vh;
+    background: #34A9A1;
+    margin-top: 11.3vh;
+    color: #FFFFFF;
+}
+
+.statBlock h2 {
+    display: block;
+    width: 14.2vw;
+    height: 3.25vh;
+    font-size: 4vh;
+    margin-left: 42.8vw;
+    font-weight: 500;
+}
+
+.stBlocks {
+    display: inline-block;
+    width: 10vw;
+    height: 27.7vh;
+    margin-top: 12.16vh;
+    margin-left: 5vw;
+}
+
+.round {
+    width: 10vw;
+    height: 19vh;
+    border: 1.25vh solid #FFFFFF;
+    border-radius: 80vh;
+}
+
+.stBlocks label {
+    display: block;
+    margin-top: -10.5vh;
+    margin-left: 0vw;
+    text-align: center;
+}
+
+.textSt {
+    margin-top: 8.5vh;
+    font-size: 2.5vh;
+    font-weight: 500;
+    text-align: center;
+}
+
+.feauturs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 65vh;
+    margin-top: 5.25vh;
+    background: #FFFFFF;
+    font-style: normal;
+    color: #34A9A1;
+}
+
+.feauturs h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 4vh;
+    line-height: 4.9vh;
+}
+
+.feauturs img {
+    display: inline-flex;
+    max-width: 11.5vw;
+    max-height: 18.75vh;
+    margin-left: 5vw;
+    margin-right: 1vw;
+}
+
+.feauturs article {
+    display: flex;
+    flex-direction: column;
+    width: 23.8vw;
+    height: 19.3vh;
+    font-size: 2vh;
+    margin-left: 0;
+    margin-right: 10vw;
+
+}
+
+.feauturs article h3{
+    max-width: 23vw;
+    font-size: 2.9vh;
+    line-height: 3.4vh;
+    margin-bottom: 0vh;
+    margin-top: 0vh;
+    font-weight: 500;
+}
+
+.mission {
+    margin-top: 5.25vh;
+    height: 53.6vh;
+}
+
+.mis {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 66.6vw;
+    height: 47.7vh;
+    background-color: #34A9A1;
+    margin-left: 32.3vw;
+    color: #fff;
+}
+
+.mission img {
+    position: absolute;
+    width: 45vw;
+    height: 40.25vh;
+    margin-top: 13.4vh;
+}
+
+.mis img {
+    margin-top: -16.5vh;
+    margin-left: 19.5vw;
+    width: 6.2vw;
+    height: 11.66vh;
+}
+
+.mis h1 {
+    display: inline-block;
+    max-height: 10vh;
+    margin-left: 27vw;
+    margin-top: 0vh;
+    font-size: 4vh;
+    line-height: 4.9vh;
+}
+.mis div {
+    display: inline-block;
+    width: 38.5vw;
+    height: 34.3vh;
+    margin-left: 27vw;
+    font-size: 2vh;
+    line-height: 2.9vh;
+}
+
+.mis h3 {
+    margin-top: -1vh;
+}
+
+
+.teamBlock {
+    height: 54vh;
+    margin-top: 5.25vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.teamBlock h1 {
+    color: #34A9A1;
+    width: 100%;
+    height: 4vh;
+    text-align: center;
+    font-weight: 1000;
+}
+
+.teamElnts {
+    display: inline-block;
+    width: 9vw;
+    height: 28vh;
+    align-items: center;
+    color: #34A9A1;
+    opacity: 0.57;
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 2.8vh;
+    line-height: 3vh;
+    text-align: center;
+}
+
+.teamElnts div {
+    display: block;
+    margin-bottom: 0.5vh;
+    width: 9vw;
+    height: 18vh;
+    border-radius: 50%;
+    background-color: #c4c4c4;
+}
+
+.teamElnts:hover div{
+    background: #FFFFFF;
+    border: 1.25vh solid #368B84;
+    box-sizing: border-box;
+    cursor: pointer;
+    opacity: 100;
+}
+
+.teamElnts:hover {
+    color: #368B84;
+    opacity: 100;
+}
+
+/*  FOOTER  */
+
+footer {
+    align-items: center;
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    justify-content: space-between;
+    background: #34A9A1;
+}
+
+.footer {
+    align-items: center;
+    display: flex;
+    height: 15.5vh;
+    width: 30vw;
+}
+
+.footText {
+    font-size: 3.5vh;
+    margin-left: 1vw;
+    letter-spacing: 0.1vw;
+    line-height: 4vh;
+    font-weight: bold;
+    color: #fff;
+}
+
+#footMenuLeft,
+#footMenuRight {
+    margin-left: -12vw;
+    display: inline-block;
+    list-style-type: none;
+    text-align: center;
+    color: #fff;
+}
+
+#footMenuLeft li {
+    min-width: 6.25vw;
+}
+
+footer a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5vh;
+
+}
+
+footer a:hover {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-decoration: underline;
+}
+
+footer a:active {
+    text-decoration: underline;
+    background: #34A9A1;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#copyr {
+    text-align: right;
+    list-style-type: none;
+    margin-right: 3.5vh;
+    color: #fff;
+}
+
+.cR {
+    font-style: normal;
+    font-size: 4vh;
+    line-height: 4.6vh;
+}
+
+.allR {
+    font-size: 1.5vh;
+    line-height: 1.8vh;
+}
+
+/*  ABOUT US  */
+
+.aboutMain {
+    margin-left: 23.4vw;
+    padding: 2.5vh 2vw;
+    display: flex;
+    width: 53vw;
+    background-color: #fff;
+    color: #34A9A1;
+
+}
+
+.aboutMain h2 {
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 2.9vh;
+    line-height: 2.9vh;
+    text-align: center;
+}
+
+.abouttext span {
+    font-weight: 1000;
+}
+
+.aboutPers {
+    display: inline-block;
+    width: 6.3vw;
+    height: 25vh;
+    background-color: #C4C4C4;
+    border: 0.08vh solid #000000;
+    box-sizing: border-box;
+    margin-right: -0.3vw;
+    margin-top: 2.5vh;
+    text-align: center;
+    color: #000;
+}
+
+.aboutPers:hover {
+    cursor: pointer;
+}
+
+.contactsMain,
+.broadMain {
+    display: flex;
+    margin-left: 23.4vw;
+    padding: 2.5vh 2vw;
+    width: 53vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #fff;
+    color: #34A9A1;
+}
+
+.contactsMain h2,
+.broadMain h2 {
+    text-align: center;
+    width: 100vh;
+    font-weight: 500;
+}
+
+.detailsL,
+.detailsR {
+    display: inline-block;
+    width: 24.4vw;
+    font-style: normal;
+    font-size: 1.8vh;
+    line-height: 2.4vh;
+}
+
+.detailsL {
+    text-align: left;
+}
+
+.detailsR {
+    text-align: right;
+}
+
+/*  CONTACTS  */
+
+.contactsMain img {
+    width: 48.8vw;
+    margin-top: 1.6vh;
+}
+
+.contactsMain span {
+    font-weight: 500;
+}
+
+.broadMain {
+    font-size: 1.8vh;
+    line-height: 2.4vh;
+}
+
+.broadForm {
+    display: flex;
+    flex-direction: column;
+    width: 48.8vw;
+
+}
+
+.broadForm input,
+.broadForm textarea {
+    background: #FFFFFF;
+    border: 0.25vh solid rgba(52, 169, 161, 0.73);
+    box-sizing: border-box;
+    border-radius: 2vh;
+    margin-top: 2vh;
+}
+
+#SNO,
+#email {
+    width: 50%;
+}
+
+#SNO,
+#email,
+#header {
+    height: 4vh;
+}
+
+/*  BROADCAST  */
+
+.broadForm textarea {
+    height: 10.8vh;
+}
+
+.broadForm input[value],
+.broadForm textarea[placeholder]     {
+    font-style: normal;
+    font-size: 1.8vh;
+    line-height: 2vh;
+    padding-left: 1vw;
+    color: #34A9A1;
+}
+
+.broadButton {
+    display: flex;
+    width: 48.8vw;
+    margin-top: 1.8vh;
+    justify-content: space-between;
+}
+
+.dwnFile {
+    display: block;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    background-image: url(img/Attachment_on_white.png);
+    width: 3.2vw;
+    height: 7.5vh;
+}
+
+.load {
+    display: none;
+    font-size: 1.8vh;
+    margin-top: 2vh;
+    margin-left: -30.5vw;
+    color: #34A9A1;
+}
+
+.dwnFile:hover {
+    cursor: pointer;
+}
+
+.broadButton:hover .load{
+    display: block;
+}
+
+#broadSubmit {
+    margin-top: 1vh;
+    width: 7.5vw;
+    height: 5vh;
+    border-width: 0.1vw;
+    background: #34A9A1;
+    border-radius: 2.5vh;
+    border-color: #34A9A1;
+    outline: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6vh;
+    line-height: 2vh;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#broadSubmit:hover {
+    cursor: pointer;
+    background: #fff;
+    border-color: #34A9A1;
+    color: #34A9A1;
+}
+
+#broadSubmit:active {
+    background: #FFFFFF;
+    border: 0.05vw solid #34A9A1;
+    box-sizing: border-box;
+    box-shadow: inset 0vh 0.20vw 0.33vh rgba(0, 0, 0, 0.25);
+    border-radius: 2.5vh;
+}
