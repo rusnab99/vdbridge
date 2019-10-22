@@ -799,3 +799,116 @@ footer a:active {
     box-shadow: inset 0vh 0.20vw 0.33vh rgba(0, 0, 0, 0.25);
     border-radius: 2.5vh;
 }
+fieldset{
+    border: none;
+}
+
+#window-regis {
+    position: fixed;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+    background: #fff;
+    color: #34A9A1;
+    margin-left: 25%;
+    margin-top: 0%;
+}
+
+#window-regis legend{
+    font-size: 4vh;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 5vh;
+    margin-bottom: 1.9vh;
+}
+
+#window-regis label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2vh;
+    line-height: 2.5vh;
+    max-width: 10vw;
+}
+
+.button-regis{
+    display: flex;
+    width: 19.8vw;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#u-list{
+    margin-top: 8.8vh;
+}
+
+.button-regis button{
+    display: inline-block;
+    background: #34A9A1;
+    border-radius: 2.5vh;
+    height: 4.5vh;
+    min-width: 5.3vw;
+    border: none;
+    outline: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.7vh;
+    line-height: 1.9vh;
+    padding: 1.5vh 1vw;
+    color: #fff;
+}
+
+#email2, #email1, #password, #u-name, #u-number{
+    width: 19.8vw;
+    height: 2.8vh;
+    background: #FFFFFF;
+    border: 0.16vh solid #34A9A1;
+    box-sizing: border-box;
+    border-radius: 1.3vh;
+}
+
+.l-fieldset,
+.r-fieldset{
+    display: flex;
+    width: 45%;
+    margin: 1 auto;
+}
+
+hr{
+    display: block;
+    border: 0.05vw solid #34A9A1;
+    filter: blur(0.33vh);
+    transform: rotate(0deg);
+    height: : 25vh;
+}
+
+#u-reg{
+    margin-top: 1.2vh;
+}
+
+#u-reg button{
+    margin-left: 13vw;
+}
+
+.check input{
+    background: #FFFFFF;
+    border: 0.08vh solid #34A9A1;
+    box-sizing: border-box;
+}
+
+#window-regis button:hover{
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 0.08vh solid #34A9A1;
+    box-sizing: border-box;
+    border-radius: 2.5vh;
+    color: #34A9A1;
+}
+
+#window-regis button:active{
+    background: #FFFFFF;
+    border: 0.08vh solid #34A9A1;
+    box-sizing: border-box;
+    box-shadow: inset 0vh 0.2vw 0.3vh rgba(0, 0, 0, 0.25);
+    border-radius: 2.5vh;
+}
