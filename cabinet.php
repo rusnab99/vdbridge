@@ -1,73 +1,115 @@
-<?php
-global $wpdb
+<?php include $_SERVER['DOCUMENT_ROOT'].'/wp-load.php';
+global $wpdb;
 $data=json_decode(str_replace("\\\"","\"",$_POST["login"]),true);
  $res="Coming soon...";
-if($data["blockId"]==0)$res="Coming soon...";else
-if($data["blockId"]==1) {
-    $sql = "SELECT * FROM `vdb_fisicals` WHERE id='".$_COOKIE["user_id"] ."'";
-
-    $posts = $wpdb->get_row($sql,ARRAY_A);
-    $res = "<div class=\"tab\">
-			<span><a class=\"tablinks\" onclick=\"openListening(event, 'profile')\">Профиль</a></span>
-			<span><a class=\"tablinks\" onclick=\"openListening(event, 'structure')\">Структура</a></span>
-			<span><a class=\"tablinks\" onclick=\"openListening(event, 'other')\">Как видят другие</a></span>
+if($data["blockId"]==1)$res="<div class=\"tab\">
+			<span><a class=\"tablinks\" onclick=\"openListening('profile')\">Профиль</a></span>
+			<span><a class=\"tablinks\" onclick=\"openListening( 'structure')\">Структура</a></span>
+			<span><a class=\"tablinks\" onclick=\"openListening( 'other')\">Как видят другие</a></span>
 		</div>
 
-		<div id='infoPanel' class=\"white-list\">
-			<div id=\"profile\" class=\"tabcontent\">
+		<div class=\"white-list\">
+			<div id=\"other\" class=\"tabcontent\">
 			</div>
 
 			<div id=\"structure\" class=\"tabcontent\">
 			</div>
 
-			<div id=\"other\" class=\"tabcontent\">
+			
+			<div id=\"profile\" class=\"tabcontent\">
 					<form>
 						<fieldset id=\"manufac-details\">
-							<input type=\"text\" id=\"form-manufac\" value=\"Физическое лицо\" required>
+							<select style=\"
+    width: 35vw;
+    height: 3.5vh;
+    background: #FFFFFF;
+    border: 0.2vw solid rgba(52, 169, 161, 0.73);
+    box-sizing: border-box;
+    border-radius: 2vh;
+    margin-bottom: 2vh;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8vh;
+    line-height: 2.6vh;
+    color: #34A9A1;
+    /* padding: 1vh 1vw; */
+    margin-right: 2vw;
+\"  id=\"form-manufac\" value=\"Форма предприятия*\" required>
+							
+							
+							<option >Физическое лицо</option>
+							<option >Индивидуальный предпринематель</option>
+							<option>Юридическое лицо (организация)</option>
+							<option disabled selected>Форма предприятия*</option>
+							</select>
 							<input type=\"text\" id=\"name-manufac\" value=\"Название предприятия*\" required>
 							<input type=\"text\" id=\"slogan\" value=\"Слоган*\" required>
 							<input type=\"text\" id=\"wsite\" value=\"Сайт*\" required>
 							<input type=\"text\" id=\"location\" value=\"Страна, город, область*\" required>
-							<div id=\"load-photo\">
-								<span id=\"photo\"></span>
-								<button type=\"submit\">Загрузить</button>
-							</div>
+							
+							<button onclick='sendManuf1();sendManuf2();return false;'>Сохранить</button>
+							
+						</fieldset>
+					</form>
+					<div id='profile_dynamic'/>
+";else
+if($data["blockId"]==0){
+    $sql = "SELECT * FROM `vdb_fisical` WHERE userId='".$_COOKIE["user_id"] ."'";
+
+    $posts = $wpdb->get_row($sql,ARRAY_A,0);
+    $res = "<div class=\"tab\">
+	
+			<span><a class=\"tablinks\" onclick=\"openListening( 'profile');\">Профиль</a></span>
+			<span><a class=\"tablinks\" onclick=\"openListening( 'edit');\">Редактирование</a></span>
+		</div>
+
+		<div class=\"white-list\">
+			
+
+			<div id=\"edit\" class=\"tabcontent\">
+			<script>
+			$(\"input\").focus(function(){
+   alert(\"done\");
+        this.select();
+    
+});</script>
+					<form>
+						<fieldset id=\"manufac-details\">
+							<input type=\"text\" onclick=\"this.select()\"  id=\"form_manufac\" value=\"Физическое лицо\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"name_manufac\" value=\"Название предприятия*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"slogan\" value=\"Слоган*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"wsite\" value=\"Сайт*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"loc\" value=\"Страна, город, область*\" required>
 						</fieldset>
 					</form>
 					<form>
 						<fieldset id=\"manufac-details2\">
 							<div>
-							<input type=\"text\" id=\"form-manufac\" value=\"ФИО*\" required>
-							<input type=\"text\" id=\"name-manufac\" value=\"Гражданство*\" required>
-							<input type=\"date\" id=\"\" value=\"Дата рождения*\" required>
-							<input type=\"text\" id=\"\" value=\"ИНН*\" required>
-							<input type=\"text\" id=\"\" value=\"Серия и номер паспорта*\" required>
-							<input type=\"text\" id=\"\" value=\"Кем и когда выдан*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"FIO\" value=\"ФИО*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"country\" value=\"Гражданство*\" required>
+							<input type=\"date\" id=\"birth\" value=\"Дата рождения*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"INN\" value=\"ИНН*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"passport\" value=\"Серия и номер паспорта*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"pass_given\" value=\"Кем и когда выдан*\" required>
 						</div>
 						<div>
-							<input type=\"text\" id=\"\" value=\"Наименование банка*\" required>
-							<input type=\"text\" id=\"\" value=\"Расчетный счет*\" required>
-							<input type=\"text\" id=\"\" value=\"Корреспондентский счет*\" required>
-							<input type=\"text\" id=\"\" value=\"БИК*\" required>
-							<input type=\"text\" id=\"\" value=\"Адрес пребывания (жительства)*\" required>
-							<input type=\"email\" id=\"\" value=\"E-mail*\" required>
-							<input type=\"text\" id=\"\" value=\"Телефон*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"bankName\" value=\"Наименование банка*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"checkingAcc\" value=\"Расчетный счет*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"correspoyndentAcc\" value=\"Корреспондентский счет*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"BIK\" value=\"БИК*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"address\" value=\"Адрес пребывания (жительства)*\" required>
+							<input type=\"email\" id=\"email\" value=\"E-mail*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"phne\" value=\"Телефон*\" required>
+							<button  class=\"add-butt\" onclick='send1(form_manufac,name_manufac , slogan,wsite , loc , birth ,FIO,country, INN , passport , pass_given , bankName , checkingAcc , correspoyndentAcc , BIK , address , email , phne );return false;'>Добавить</button>
+							 
 						</div>
-						</fieldset>
-					
-						<fieldset id=\"manufac-details3\">
-							<input type=\"text\" id=\"\" value=\"ФИО сотрудника\">
-							<input type=\"text\" id=\"\" value=\"Должность\">
-							<input type=\"text\" id=\"\" value=\"Телефон\">
-							<input type=\"email\" id=\"\" value=\"E-mail\">
-							<button type=\"submit\" class=\"add-butt\">Добавить</button>
 						</fieldset>
 					</form>
 					<form id=\"form3\">
 						<fieldset id=\"manufac-details4\">
-							<input type=\"text\" id=\"role\" value=\"Роль*\" required>
-							<input type=\"text\" id=\"part\" value=\"Минимальный объем партии\" required>
-							<input type=\"text\" id=\"acur\" value=\"Классы точности устройств\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"role\" value=\"Роль*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"part\" value=\"Минимальный объем партии\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"acur\" value=\"Классы точности устройств\" required>
 						</fieldset>
 					</form>
 					<div class=\"input-group\">
@@ -79,17 +121,14 @@ if($data["blockId"]==1) {
 						<input type=\"checkbox\"><label for=\"checkbox\">Шестой</label>
 						<input type=\"checkbox\"><label for=\"checkbox\">Седьмой</label>
 					</div>
-			</div>
-				
-		</div>
-<div class=\"white-list\">
-			<div id=\"profile\" class=\"tabcontent\">
+		<button type=\"submit\" class=\"add-butt\" onclick='send2(role,part,acur)'>Загрузить</button>			
+					
+					
 			</div>
 
-			<div id=\"structure\" class=\"tabcontent\">
-			</div>
 
-			<div id=\"other\" class=\"tabcontent\">
+
+			<div id=\"profile\" style=\"display: flex;\" class=\"tabcontent\">
 				<div class=\"profile-manufac\">
 					<span class=\"label-group\">
 						<label name=\"manufac\">".$posts["pName"]."</label>
@@ -114,7 +153,7 @@ if($data["blockId"]==1) {
 						</span>
 					
 						<span class=\"label-group2-mini\">
-							<label>Наименование банка: ".$posts["bankName"]."label>
+							<label>Наименование банка: ".$posts["bankName"]."</label>
 							<label>Расчетный счёт: ".$posts["checkingAcc "]."</label>
 							<label>Корреспондентский счёт: ".$posts["correspoyndentAcc "]."</label>
 							<label>БИК: ".$posts["BIK"]."</label>
@@ -160,16 +199,17 @@ if($data["blockId"]==4) $res="Coming soon...";else
 if($data["blockId"]==5) $res="Coming soon...";else
 if($data["blockId"]==6){  $sql = "SELECT * FROM `vdb_orders` WHERE prodID!='".$_COOKIE["user_id"] ."'& executorID =null";
 $res="<div class=\"tab\">
-			<span><a href=\"#\" class=\"tablinks\" onclick=\"openListening(event, 'tape')\">Лента заказов</a></span>
-    < span><a href = \"#\" class=\"tablinks\" onclick = \"openListening(event, 'ordered')\" > Заказал</a ></span >
-			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening(event, 'do')\" > Выполняю</a ></span >
-			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening(event, 'archive')\" > Архив</a ></span >
-			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening(event, 'make-ord')\" > Создание</a ></span >
-			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening(event, 'order-tab')\" > Заказ</a ></span >
+			<span><a href=\"#\" class=\"tablinks\" onclick=\"openListening( 'tape')\">Лента заказов</a></span>
+    <span><a href = \"#\" class=\"tablinks\" onclick = \"openListening( 'ordered')\" > Заказал</a ></span >
+			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening( 'do')\" > Выполняю</a ></span >
+			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening( 'archive')\" > Архив</a ></span >
+			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening( 'make-ord')\" > Создание</a ></span >
+			<span ><a href = \"#\" class=\"tablinks\" onclick = \"openListening( 'order-tab')\" > Заказ</a ></span >
 		</div >
 
 		<div class=\"white-list\" >";
-    $posts = $wpdb->get_row($sql,ARRAY_A);foreach ($posts as $post){
+    $posts = $wpdb->get_row($sql,ARRAY_A);
+						if($posts!=null)foreach ($posts as $post){
 
     $res=$res."		
 			<div id=\"tape\" class=\"tabcontent\">
@@ -183,13 +223,13 @@ $res="<div class=\"tab\">
 						<div class=\"text-order\"> ".$post["description"]."</div>
 						<div class=\"attach\">
 							<span>Вложение:</span>
-							<img src=\"img/Attachment_on_green.png\">
+							<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 							<span>Вложение_1</span>
-							<img src=\"img/Attachment_on_green.png\">
+							<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 							<span>Вложение_2</span>
-							<img src=\"img/Attachment_on_green.png\">
+							<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 							<span>Вложение_3</span>
-							<img src=\"img/Attachment_on_green.png\">
+							<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 							<span>Вложение_4</span>
 						</div>
 
@@ -290,7 +330,9 @@ $res="<div class=\"tab\">
 			</div>
 ";}
 $sql = "SELECT * FROM `vdb_orders` WHERE prodID='".$_COOKIE["user_id"] ."'";
-     $posts = $wpdb->get_row($sql,ARRAY_A);foreach ($posts as $post){
+     $posts = $wpdb->get_results($sql,ARRAY_A);
+						
+						if($posts!=null)foreach ($posts as $post){
         $res=$res."		
 			<div id=\"ordered\" class=\"tabcontent\">
 				
@@ -409,7 +451,7 @@ $sql = "SELECT * FROM `vdb_orders` WHERE prodID='".$_COOKIE["user_id"] ."'";
 				
 			</div>
 ";}
-
+						
 			$res=$res."		
 			<div id=\"do\" class=\"tabcontent\">
 				
@@ -529,19 +571,19 @@ $sql = "SELECT * FROM `vdb_orders` WHERE prodID='".$_COOKIE["user_id"] ."'";
 			</div>
 ";
 			
-			"	<div id=\"make-ord\" class=\"tabcontent\">
+	$res=$res."	<div id=\"make-ord\" class=\"tabcontent\">
 				<div class=\"edit-po\">
 					<form>
 						<fieldset id=\"manufac-details2\">
-							<input type=\"text\" id=\"name\" value=\"Название заказа*\" required>
-							<input type=\"text\" id=\"date1\" value=\"Крайний срок подачи заявок*\" required>
-							<input type=\"text\" id=\"date2\" value=\"Крайний срок выбора исполнителя*\" required>
-							<input type=\"text\" id=\"date3\" value=\"Крайний срок выполнения заказа*\" required>
-							<input type=\"text\" id=\"date4\" value=\"Крайний срок передачи заказа*\" required>
-							<input type=\"text\" id=\"quan\" value=\"Количество экземпляров*\" required>
-							<input type=\"text\" id=\"def\" value=\"Допустимый процент брака*\" required>
-							<input type=\"text\" id=\"accur\" value=\"Классы точности*\" required>
-							<input type=\"text\" id=\"tpe\" value=\"Тип печатной платы*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"name\" value=\"Название заказа*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"date1\" value=\"Крайний срок подачи заявок*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"date2\" value=\"Крайний срок выбора исполнителя*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"date3\" value=\"Крайний срок выполнения заказа*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"date4\" value=\"Крайний срок передачи заказа*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"quan\" value=\"Количество экземпляров*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"def\" value=\"Допустимый процент брака*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"accur\" value=\"Классы точности*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"tpe\" value=\"Тип печатной платы*\" required>
 						</fieldset>
 					</form>
 					<form>
@@ -550,7 +592,7 @@ $sql = "SELECT * FROM `vdb_orders` WHERE prodID='".$_COOKIE["user_id"] ."'";
 							<textarea id='desc' placeholder=\"Подробное описание заказа*\"></textarea>
 						</div>
 						<fieldset id=\"manufac-details2\">
-							<input type=\"text\" id=\"mthd\" value=\"Метод изготовления печатной платы*\" required>
+							<input type=\"text\" onclick=\"this.select()\"  id=\"mthd\" value=\"Метод изготовления печатной платы*\" required>
 							<input type=\"checkbox\" id=\"material\" value=\"Наличие давальческого сырья*\" required>
 						
 						
@@ -560,80 +602,19 @@ $sql = "SELECT * FROM `vdb_orders` WHERE prodID='".$_COOKIE["user_id"] ."'";
 
 				<div class=\"attach1\">
 					<span>Вложение:</span>
-					<img src=\"img/Attachment_on_green.png\">					
+					<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">					
 					<span>Схема</span>
 					<input type='file' id='file1'/>
-					<img src=\"img/Attachment_on_green.png\">
+					<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 					<span>Документация</span><input type='file' id='file2'/>
-					<img src=\"img/Attachment_on_green.png\">
+					<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 					<span>Требования</span><input type='file' id='file3'/>
-					<img src=\"img/Attachment_on_green.png\">
+					<img src=\"http://vdbridge.ru/wp-content/uploads/2019/10/Attachment_on_green.png\">
 					<span>BOM-лист</span><input type='file' id='file4'/>
-					<button class=\"add-butt\">Сохранить</button>
+					<button onclick=\"sendOrder()\" class=\"add-butt\">Сохранить</button>
 				</div>
 			</div>
-</<script >function sendOrder()
-{
-   
-    var formData = new FormData();
-    formData.append(\"myFile\", document.getElementById(\"date1\").files[0], document.getElementById(\"date1\").files[0].name);
-    formData.append(\"myFile\", document.getElementById(\"date2\").files[0], document.getElementById(\"date2\").files[0].name);
-    formData.append(\"myFile\", document.getElementById(\"date3\").files[0], document.getElementById(\"date3\").files[0].name);
-    formData.append(\"myFile\", document.getElementById(\"date4\").files[0], document.getElementById(\"date4\").files[0].name);
-    
-    var xhr = new XMLHttpRequest();
-    xhr.open(\"POST\",  ".get_theme_file_uri("orderFile.php").");
-    xhr.send(formData);
-    xhr.onload=function() {
-        var request = new XMLHttpRequest();
 
-request.open(\"POST\", " . get_theme_file_uri("set_order.php").", true);
-request . setRequestHeader(\"Content - Type\", \"application / x - www - form - urlencoded; charset = UTF - 8\");
-var files=this.response;
-request . onload = function () {
-    if (this . status >= 200 && this . status < 400) {
-
-        var
-        resp = this . response;
-        if (resp == 1)
-            document . getElementById(\"email_ch\").innerHTML = \"Данный E - mail адрес не найден\";
-	else if (resp == 2)
-            document . getElementById(\"pass_ch\").innerHTML = \"Введен неверный пароль\";
-	else if (resp == 0) location . replace(\" . get_site_url() . \");
-  } else {
-        // We reached our target server, but it returned an error
-        alert(\"Все сломалось!Попробуйте перезагрузить страницу\");
-  }
-};
-let data ={
-    name:document.getElementById(\"name\").value,
-    description:document.getElementById(\"desc\").value,
-    quantity:document.getElementById(\"quan\").value,
-    type:document.getElementById(\"tpe\").value,
-    method:document.getElementById(\"mthd\").value,
-    defect:document.getElementById(\"def\").value,
-    accuracity:document.getElementById(\"accur\").value,
-    material:document.getElementById(\"material\").value,
-    date1:document.getElementById(\"date1\").value,
-    date2:document.getElementById(\"date2\").value,
-    date3:document.getElementById(\"date3\").value,
-    date4:document.getElementById(\"date4\").value,
-    file1:files[0],
-    file2:files[1],
-    file3:files[2],
-    file4:files[3]
-};
-
-let json = \"order = \" + JSON . stringify(data);
-
-request . send(json);
-}
-
-return false;
-}
-      
-    }
-}</script>
 	
 
 			

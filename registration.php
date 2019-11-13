@@ -31,7 +31,7 @@ else{
     echo 0;
     $email=esc_sql($data["mail"]);
     $pass=esc_sql($data["pass"]);
-    $phone=esc_sql($data["phone"]);
+    $phone=esc_sql($data["phone"]);try {}catch{}
     $user=esc_sql($data["user"]);
         $sql = "INSERT INTO vdb_clients (`email`,`pass`,`phone `,'user','code') VALUES
 	('".$email."','".$pass."','".$phone.",'".$user.",NULL)";
